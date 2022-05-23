@@ -1,7 +1,7 @@
-import {feedbacksCollection, usersCollection} from './db'
-import {FeedbackDBType, UserDBType} from './types'
+import {feedbacksCollection, adminsCollection} from './db'
+import {FeedbackDBType, AdminDBType} from './types'
 import {ObjectId} from 'mongodb'
-import {usersService} from '../domain/users-service'
+import {adminsRepository} from './admins-repository'
 
 export const feedbacksRepository = {
     async getAllFeedbacks(): Promise<FeedbackDBType[]> {
@@ -10,27 +10,23 @@ export const feedbacksRepository = {
             .sort('createdAt', -1)
             .toArray()
     },
-    async createFeedback(comment: string, userId: ObjectId): Promise<FeedbackDBType> {
-        const user = await usersService.findUserById(userId)
-        if (!user) throw new Error('user is not exists for specified userId')
+    async createFeedback(comment: string, adminId: ObjectId): Promise<FeedbackDBType> {
+        const admin = await adminsRepository.findById(adminId)
+        if (!admin) throw new Error('admin is not exists for specified userId')
 
         const feedback: FeedbackDBType = {
-            userId,
+            adminId: adminId,
             createdAt: new Date(),
             comment,
-            userName: user.userName,
+            adminName: admin.name,
             _id: new ObjectId()
         }
         await feedbacksCollection.insertOne(feedback)
         return feedback
     },
-    async findUserById(id: number): Promise<UserDBType | null> {
-        let product = await usersCollection.findOne({id: id})
-        if (product) {
-            return product
-        } else {
-            return null
-        }
+    async findFeedbackById(id: number): Promise<AdminDBType | null> {
+        let feedback = await adminsCollection.findOne({id: id})
+        return feedback
     }
 }
 

@@ -1,14 +1,12 @@
 import {MongoClient} from 'mongodb'
-import {FeedbackDBType, UserDBType} from './types'
+import {FeedbackDBType, AdminDBType} from './types'
+import {settings} from '../settings'
 
-const mongoUri =
-    process.env.mongoURI = "mongodb://0.0.0.0:27017/?maxPoolSize=20&w=majority";
-
-const client = new MongoClient(mongoUri);
+const client = new MongoClient(settings.MONGO_URI);
 
 let db = client.db("users-management")
 
-export const usersCollection = db.collection<UserDBType>('users')
+export const adminsCollection = db.collection<AdminDBType>('admins')
 export const feedbacksCollection = db.collection<FeedbackDBType>('feedbacks')
 
 export async function runDb() {

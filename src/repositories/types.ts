@@ -1,15 +1,15 @@
 import {ObjectId, WithId} from 'mongodb'
 
-export type UserDBType = WithId<{
+export type AdminDBType = WithId<{
     email: string
-    userName: string
-    password: string
+    name: string
+    passwordHash: string
     createdAt: Date
 }>
 
 export type FeedbackDBType = WithId<{
-    userId: ObjectId
-    userName: string
+    adminId: ObjectId
+    adminName: string
     comment: string
     createdAt: Date
 }>

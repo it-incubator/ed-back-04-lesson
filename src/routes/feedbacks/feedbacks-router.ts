@@ -1,18 +1,18 @@
 import {Router} from 'express'
-import {usersService} from '../../domain/users-service'
-import {authMiddleware} from '../../middlewares/auth-middleware'
+import {adminAuthMiddleware} from '../../middlewares/admin-auth-middleware'
 import {feedbacksService} from '../../domain/feedbacks-service'
+import {superAdminAuthMiddleware} from '../../middlewares/superadmin-auth-middleware'
 
 export const feedbacksRouter = Router({})
 
 feedbacksRouter
-    .post('/', authMiddleware,
+    .post('/', adminAuthMiddleware,
         async (req, res) => {
-            const newProduct = await feedbacksService.sendFeedback(req.body.comment, req.user!._id)
+            const newProduct = await feedbacksService.sendFeedback(req.body.comment, req.admin!._id)
             res.status(201).send(newProduct)
         })
     .get('/', async (req, res) => {
-        const users = await usersService
-            .getAllUsers()
+        const users = await feedbacksService
+            .allFeedbacks()
         res.send(users)
     })

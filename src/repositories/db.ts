@@ -4,7 +4,7 @@ import {settings} from '../settings'
 
 const client = new MongoClient(settings.MONGO_URI);
 
-let db = client.db("users-management")
+let db = client.db("admins-management")
 
 export const adminsCollection = db.collection<AdminDBType>('admins')
 export const feedbacksCollection = db.collection<FeedbackDBType>('feedbacks')

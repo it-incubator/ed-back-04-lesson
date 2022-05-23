@@ -24,8 +24,8 @@ export const feedbacksRepository = {
         await feedbacksCollection.insertOne(feedback)
         return feedback
     },
-    async findFeedbackById(id: number): Promise<AdminDBType | null> {
-        let feedback = await adminsCollection.findOne({id: id})
+    async findFeedbackById(id: ObjectId): Promise<FeedbackDBType | null> {
+        let feedback = await feedbacksCollection.findOne({_id: id})
         return feedback
     }
 }

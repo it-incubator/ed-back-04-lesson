@@ -2,8 +2,7 @@ import {adminsRepository} from '../repositories/admins-repository'
 import {AdminDBType} from '../repositories/types'
 import {ObjectId} from 'mongodb'
 import bcrypt from 'bcrypt'
-import jwt from 'jsonwebtoken'
-import {settings} from '../settings'
+import {jwtUtility} from '../application/jwt-utility'
 
 export const authService = {
     async getAllUsers(): Promise<AdminDBType[]> {
@@ -22,11 +21,16 @@ export const authService = {
         const hash = await bcrypt.hash(password, 10)
         return hash
     },
+    async isPasswordCorrect(password: string, hash: string) {
+        const compareResult: boolean = await bcrypt.compare(password, hash)
+        return compareResult
+    },
     async checkAndFindUserByToken(token: string) {
         try {
-            const result: any = jwt.verify(token, settings.JWT_SECRET)
-            const user = await adminsRepository.findById(new ObjectId(result.userId))
-            return user
+            const adminId: ObjectId | null = await jwtUtility.extractAdminIdFromToken(token)
+            if (!adminId) return null
+            const admin = await adminsRepository.findById(adminId)
+            return admin
         } catch (error) {
             return null
         }

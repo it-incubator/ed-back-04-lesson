@@ -1,7 +1,6 @@
 import {Router} from 'express'
 import {adminAuthMiddleware} from '../../middlewares/admin-auth-middleware'
 import {feedbacksService} from '../../domain/feedbacks-service'
-import {superAdminAuthMiddleware} from '../../middlewares/superadmin-auth-middleware'
 
 export const feedbacksRouter = Router({})
 

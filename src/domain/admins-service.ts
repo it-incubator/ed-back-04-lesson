@@ -1,9 +1,6 @@
 import {adminsRepository} from '../repositories/admins-repository'
 import {AdminDBType} from '../repositories/types'
 import {ObjectId} from 'mongodb'
-import bcrypt from 'bcrypt'
-import jwt from 'jsonwebtoken'
-import {settings} from '../settings'
 import {authService} from './auth-service'
 
 

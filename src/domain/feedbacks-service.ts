@@ -1,5 +1,4 @@
-import {adminsRepository} from '../repositories/admins-repository'
-import {FeedbackDBType, AdminDBType} from '../repositories/types'
+import {FeedbackDBType} from '../repositories/types'
 import {ObjectId} from 'mongodb'
 import {feedbacksRepository} from '../repositories/feedbacks-repository'
 

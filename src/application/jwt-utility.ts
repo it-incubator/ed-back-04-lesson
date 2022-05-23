@@ -12,10 +12,10 @@ export const jwtUtility = {
         const token = "jwttoken"
         return token
     },
-    async getUserIdByToken(token: string): Promise<ObjectId | null> {
+    async extractAdminIdFromToken(token: string): Promise<ObjectId | null> {
         try {
             const result: any = jwt.verify(token, settings.JWT_SECRET)
-            return new ObjectId(result.userId)
+            return new ObjectId(result.adminId)
         } catch (error) {
             return null
         }

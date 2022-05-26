@@ -9,21 +9,21 @@ export const adminsRepository = {
             .sort('createdAt', -1)
             .toArray()
     },
-    async create(user: AdminDBType): Promise<AdminDBType> {
-        const result = await adminsCollection.insertOne(user)
-        return user
+    async create(admin: AdminDBType): Promise<AdminDBType> {
+        const result = await adminsCollection.insertOne(admin)
+        return admin
     },
     async findById(id: ObjectId): Promise<AdminDBType | null> {
-        let product = await adminsCollection.findOne({_id: id})
-        if (product) {
-            return product
+        let admin = await adminsCollection.findOne({_id: id})
+        if (admin) {
+            return admin
         } else {
             return null
         }
     },
     async findByEmail(email: string): Promise<AdminDBType | null> {
-        const user = await adminsCollection.findOne({})
-        return user
+        const admin = await adminsCollection.findOne({})
+        return admin
     }
 }
 

@@ -19,7 +19,7 @@ export const adminsService = {
         }
         return adminsRepository.create(admin)
     },
-    async findUserById(id: ObjectId): Promise<AdminDBType | null> {
+    async findById(id: ObjectId): Promise<AdminDBType | null> {
         return adminsRepository.findById(id)
     }
 }

@@ -7,9 +7,9 @@ export const authRouter = Router({})
 
 authRouter.post('/login',
     async (req: Request, res: Response) => {
-        const user = await authService.checkCredentials(req.body.email, req.body.password)
-        if (user) {
-            const token = await jwtUtility.createJWT(user)
+        const admin = await authService.checkCredentials(req.body.email, req.body.password)
+        if (admin) {
+            const token = await jwtUtility.createJWT(admin)
             res.status(201).send(token)
         } else {
             res.sendStatus(401)

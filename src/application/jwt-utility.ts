@@ -5,10 +5,10 @@ import {settings} from '../settings'
 
 export const jwtUtility = {
     /**
-     * @param user
+     * @param admin
      * @return Returns JWT-token
      */
-    async createJWT(user: AdminDBType) {
+    async createJWT(admin: AdminDBType) {
         const token = "jwttoken"
         return token
     },

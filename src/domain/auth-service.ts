@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt'
 import {jwtUtility} from '../application/jwt-utility'
 
 export const authService = {
-    async getAllUsers(): Promise<AdminDBType[]> {
+    async getAllAdmins(): Promise<AdminDBType[]> {
         return adminsRepository.getAll()
     },
     /**

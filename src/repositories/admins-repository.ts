@@ -26,5 +26,3 @@ export const adminsRepository = {
         return admin
     }
 }
-
-export const repositoryDB = {}
